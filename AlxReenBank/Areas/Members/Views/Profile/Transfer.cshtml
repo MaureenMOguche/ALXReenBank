@@ -1,0 +1,159 @@
+﻿@using ReenBank.Models.ViewModels;
+@model TransferVM
+@{
+    ViewData["Title"] = "Deposit";
+}
+                                    
+<form method="post" asp-action="Transfer">
+    <input asp-for="@Model.SenderAccount.Id" hidden/>
+<div class="dashboard">
+        <div class="row g-0 height-100">
+            <div class="col-lg-3 text-center">
+                <div class="dashboard-left h-100 p-5">
+                    <div class="profile-mini">
+                        <img src="~/images/testimonial.jpg" alt="person" class="profile-image mb-3">
+                        <h3>@Model.Person.FirstName @Model.Person.LastName</h3>
+                    </div>
+        
+                    <div class="dashboard-nav mt-4">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav flex-column">
+                                    <li class="nav-item active">
+                                        <a class="nav-link text-light d-flex" asp-action="Index">
+                                            <i class="bi bi-gear me-4"></i>
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <hr />
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Deposit">
+                                            <i class="bi bi-book me-4"></i>
+                                            Deposit Money
+                                        </a>
+                                    </li>
+                        
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Transfer">
+                                            <i class="bi bi-book me-4"></i>
+                                            Transfer Money
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Transactions">
+                                            <i class="bi bi-table me-4"></i>
+                                            Account Statement
+                                        </a>
+                                    </li>
+
+                                    <hr>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Settings">
+                                            <i class="bi bi-person-circle me-4"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                
+                <div class="row p-4">
+                    <div class="col-lg">
+                        <div class="cards">
+                            <div class="card bg-light p-4 rounded-4 mb-4">
+                                <h4 class="text-dark text-center">Reen Bank Plus (@Model.SenderAccount.AccountNumber)</h4>
+                                <hr class="darker-green-text w-75 m-auto mb-4 mt-2">
+                                <div class="d-flex">
+                                    <div class="ms-3">
+                                        <p class="text-dark mb-0">Balace:</p>
+                                        <h3 class="fs-3 fw-bold darker-green-text">$@Model.SenderAccount.Balance</h3>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <div class="row gx-5">
+                                        <div class="col">
+                                            <div class="border">
+                                                <div class="row">
+                                                    <p class="bg-secondary p-2">Source Account</p>
+                                                </div>
+                                                <div class="row p-3">
+                                                    <div class="col">
+                                                        <label class="form-label text-dark">Account Number</label>
+                                                        <input class="form-control" type="number" asp-for="@Model.SenderAccount.AccountNumber" disabled/>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label class="form-label text-dark">Account Name</label>
+                                                        <input class="form-control" value="@Model.Person.FirstName @Model.Person.LastName" disabled/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col p-3">
+                                                    <label class="form-label text-dark">Amount to transfer</label>
+                                                    <input class="form-control" type="number" asp-for="@Model.AmountTransfer"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="border">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p class="bg-secondary p-2">Receiver Account</p>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row p-3">
+                                                    @*<form method="get" asp-action="Transfer">*@
+                                                    <div class="col-8">
+                                                        <input class="form-control" type="number" placeholder="Enter Account number" asp-for="@Model.ReceiverAccNumber"/>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <button type="submit" class="btn darker-grey-bg text-light">Search</button>
+                                                    </div>
+                                                    @*</form>*@
+                                                </div>
+                                                <div class="row p-3">
+                                                    <div class="col">
+                                                        <label class="form-label text-dark">Account Name</label>
+                                                        <input class="form-control" value="@Model.Person.FirstName @Model.Person.LastName" disabled/>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label text-dark">Description</label>
+                                                        <input class="form-control" asp-for="@Model.Description" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                      
+                                    <div class="mt-3 text-end">
+                                        <button type="submit" class="btn darker-grey-bg text-light w-50">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,80 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<form method="post">
+<div class="col-lg-8 m-auto pt-4 pb-4">
+    <div class="row">
+        <div class="col-lg-4 bg-light p-4 text-center">
+            <h1 class="darker-green-text">@Model.FirstName @Model.LastName</h1>
+            <div>
+                <img id="previewImage" class="settings-img"/>
+            </div>
+            <input type="file" id="inputImage" hidden/>
+            <div class="text-center">
+                <label for="inputImage" class="btn darker-grey-bg text-light">Upload New Photo</label>
+            </div>
+        </div>
+        <div class="col-lg-7 p-5 bg-light bg-opacity-10 m-auto">
+            <h2>Edit Profile</h2>
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" asp-for="@Model.FirstName"></label>
+                    <input class="form-control" asp-for="@Model.FirstName" />
+                    <span asp-validation-for="@Model.FirstName" class="text-danger fs-6"></span>
+                </div>
+                <div class="col">
+                    <label class="form-label" asp-for="@Model.LastName"></label>
+                    <input class="form-control" asp-for="@Model.LastName" />
+                    <span asp-validation-for="@Model.LastName" class="text-danger fs-6"></span>
+                </div>
+            </div>
+
+            <div class="col mb-3">
+                <label class="form-label" asp-for="@Model.Email"></label>
+                <input class="form-control" asp-for="@Model.Email" />
+                <span asp-validation-for="@Model.Email" class="text-danger fs-6"></span>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" asp-for="@Model.DateOfBirth"></label>
+                    <input class="form-control" asp-for="@Model.DateOfBirth" />
+                    <span asp-validation-for="@Model.DateOfBirth" class="text-danger fs-6"></span>
+                </div>
+                <div class="col">
+                    <label class="form-label" asp-for="@Model.PhoneNumber"></label>
+                    <input class="form-control" asp-for="@Model.PhoneNumber" />
+                    <span asp-validation-for="@Model.PhoneNumber" class="text-danger fs-6"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn w-50 darker-grey-bg text-light">UPDATE</button>
+        </div>
+    </div>
+</div>
+
+</form>
+
+@section Scripts{
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const element = document.getElementById('previewImage');
+                element.src = reader.result;
+            }
+            reader.onerror = function () {
+                const element = document.getElementById('errorMsg');
+                element.value = "Couldn't load the image.";
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        const input = document.getElementById('inputImage');
+        input.addEventListener('change', (event) => {
+            previewImage(event)
+        });
+    </script>
+}

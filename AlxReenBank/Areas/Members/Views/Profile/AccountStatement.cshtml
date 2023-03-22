@@ -1,0 +1,125 @@
+﻿@using ReenBank.Models.ViewModels;
+@using ReenBank.Utility;
+@model PersonAccountTransactionVM
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+
+<div class="dashboard">
+        <div class="row g-0 height-100">
+
+            <div class="col-lg-3 text-center">
+                <div class="dashboard-left h-100 p-5">
+                    <div class="profile-mini">
+                        <img src="~/images/testimonial.jpg" alt="person" class="profile-image mb-3">
+                        <h3>@Model.Person.FirstName @Model.Person.LastName</h3>
+                    </div>
+        
+                    <div class="dashboard-nav mt-4">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav flex-column">
+                                    <li class="nav-item active">
+                                        <a class="nav-link text-light d-flex" asp-action="Index">
+                                            <i class="bi bi-gear me-4"></i>
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <hr />
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Deposit">
+                                            <i class="bi bi-book me-4"></i>
+                                            Deposit Money
+                                        </a>
+                                    </li>
+                        
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Transfer">
+                                            <i class="bi bi-book me-4"></i>
+                                            Transfer Money
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Transactions">
+                                            <i class="bi bi-table me-4"></i>
+                                            Account Statement
+                                        </a>
+                                    </li>
+
+                                    <hr>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light d-flex" asp-action="Settings">
+                                            <i class="bi bi-person-circle me-4"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg p-5 bg-light">
+                <h2 class="text-dark">Statement of Account</h2>
+                
+                    <table class="table table-striped w-100">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Account Number</th>
+                                <th>Customer Name</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Credit</th>
+                                <th>Debit</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach(var transaction in Model.TransactionList)
+                            {
+                                <tr class="text-center">
+                                    <td>@transaction.BankAccount.AccountNumber</td>
+                                    <td>@Model.Person.FirstName @Model.Person.LastName</td>
+                                    <td>@transaction.TransactionDate</td>
+                                    <td>@transaction.Description</td>
+                                    @if (transaction.TransactionType == TransactionType.Credit)
+                                    {
+                                        <td>@transaction.Amount</td>
+                                        <td></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                        <td>@transaction.Amount</td>
+                                    }
+                                    <td class="fw-bold">@transaction.BankAccount.Balance</td>
+                                </tr>   
+                            }
+                        </tbody>
+                    </table>
+        
+                    @*<form method="post" asp-action="DownloadStatement">*@
+                
+                        <a asp-action="DownloadStatement" class="btn darker-grey-bg text-light">Download as PDF</a>
+                    @*</form>*@
+
+            </div>
+            
+        </div>
+
+ </div>
+
+
+
+@section Scripts{
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+}

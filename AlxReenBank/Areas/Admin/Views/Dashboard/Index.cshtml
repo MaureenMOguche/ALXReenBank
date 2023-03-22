@@ -1,0 +1,59 @@
+﻿@using ReenBank.Models.ViewModels;
+@model AdminDashboardVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="dashboard h-100">
+    <partial name="_Header" />
+
+    <div class="row h-100">
+        <div class="col-lg-2 dashboard-left h-100">
+        </div>
+        <div class="col-lg-9">
+            <div class="row pe-4">
+                <div class="col-lg-3">
+                <div class="bg-primary p-3">
+                    <h6>Total Customers</h6>
+                    <hr />
+                    <div class="row">
+                        <div class="col">
+                            <h4>@Model.PeopleList.Count()</h4>
+                        </div>
+                        <div class="col text-end">
+                            <h4>
+                                <a asp-action="ClientList" class="text-light">></a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-3">
+                <div class="bg-success p-3">
+                    <h6>Total Deposit</h6>
+                    <hr />
+                    <h4>6</h4>
+                </div>
+                </div>
+
+                <div class="col-3">
+                <div class="bg-danger p-3">
+                    <h6>Total Withdrawal</h6>
+                    <hr />
+                    <h4>6</h4>
+                </div>
+                </div>
+
+                <div class="col-3">
+                <div class="bg-info p-3">
+                    <h6>Customers Profile</h6>
+                    <hr />
+                    <h4>6</h4>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

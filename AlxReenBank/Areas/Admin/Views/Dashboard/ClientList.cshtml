@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Person>
+@{
+    ViewData["Title"] = "ClientList";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="dashboard h-100">
+<div class="row h-100">
+    <div class="col-lg-2 dashboard-left h-100">
+        sjos
+    </div>
+    <div class="col-lg-9">
+        <h1 class="text-center mt-3">Client List</h1>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Account Number</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var person in Model)
+            {
+                <tr>
+                    <td>#</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                    <td>@person.BankAccount.AccountNumber</td>
+                    <td>@person.BankAccount.Balance</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    </div>
+    </div>
+</div>
+</div>
+
